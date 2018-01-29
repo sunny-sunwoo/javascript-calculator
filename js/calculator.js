@@ -26,7 +26,7 @@ function calculator(){
 			console.log(prevOpr);			
 			var screen = document.getElementById("screen-number");			
 
-			 if (prevOpr == "/" && newNum == "0") { // exception 01 : Divide by zero
+			 if (prevOpr == "/" && newNum == "0") {  // exception 01 : Divide by zero
 						newNum = "";
 						prevNum = 0;
 						result = 0;
@@ -36,6 +36,7 @@ function calculator(){
 					}
 
 			else {
+
 
 			switch(prevOpr) {
 				case "+" : 
@@ -71,14 +72,26 @@ function calculator(){
 					break;
 
 				case "=" : 
+					result = parseInt(newNum);
 					newNum = "";
-					screen.innerHTML = result ;
+					screen.innerHTML = result;
 					prevOpr = oprVal;
 					//console.log("equals");
 					break;
+					
 
 				default:
 					return true;
+			}
+
+
+			if (isNaN(result)){		// exception 02 : double-clicking operators
+					newNum = "";
+					prevNum = 0;
+					result = 0;
+					prevOpr = "+";
+					alert("Do not double-click operators!");
+					screen.innerHTML = result;
 			}
 
 		}
